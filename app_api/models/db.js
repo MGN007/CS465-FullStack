@@ -67,3 +67,6 @@ connect();
 // Import Mongoose schema
 require('./travlr');
 module.exports = mongoose;
+
+// Load the User model so Mongoose registers it with the application
+require('./user');

@@ -1,0 +1,64 @@
+<button *ngIf="isLoggedIn()" class="btn btn-primary" (click)="toggleAddForm()">
+  Add Trip
+</button>
+
+<div *ngIf="showAddForm" class="card p-3 mb-3" style="max-width: 500px;">
+  <h4>{{ editingTrip ? 'Edit Trip' : 'Add Trip' }}</h4>
+
+  <div class="mb-2">
+    <label class="form-label">Code</label>
+    <input class="form-control" [(ngModel)]="newTrip.code">
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Name</label>
+    <input class="form-control" [(ngModel)]="newTrip.name">
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Length</label>
+    <input class="form-control" [(ngModel)]="newTrip.length">
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Start</label>
+    <input class="form-control" [(ngModel)]="newTrip.start" placeholder="2024-08-01T00:00:00.000Z">
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Resort</label>
+    <input class="form-control" [(ngModel)]="newTrip.resort">
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Per Person</label>
+    <input class="form-control" [(ngModel)]="newTrip.perPerson">
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Image</label>
+    <input class="form-control" [(ngModel)]="newTrip.image" placeholder="reef1.jpg">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea class="form-control" [(ngModel)]="newTrip.description"></textarea>
+  </div>
+
+  <button class="btn btn-success me-2" (click)="saveTrip()">
+    {{ editingTrip ? 'Update Trip' : 'Save Trip' }}
+  </button>
+
+  <button class="btn btn-secondary" (click)="cancelEdit()">
+    Cancel
+  </button>
+</div>
+
+<div class="row">
+  <app-trip-card
+    *ngFor="let trip of trips"
+    [trip]="trip"
+    (editTripEvent)="editTrip($event)"
+    (deleteTripEvent)="deleteTrip($event)">
+  </app-trip-card>
+</div>
